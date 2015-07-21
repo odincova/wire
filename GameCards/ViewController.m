@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "PlayCardPack.h"
+//#import "PlayCardPack.h"
 #import "PlayGame.h"
 
 @interface ViewController ()
@@ -50,7 +50,7 @@
 
 -(PackCards *)packCards{
     
-    return [[PlayCardPack alloc] init]; // abstract
+    return nil; // abstract
     
 }
 
