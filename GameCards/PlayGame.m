@@ -77,8 +77,7 @@ static const int COST_TO_CHOOSE = 1;
            
                         //add cards in array - faceChooseCards
            NSMutableArray *faceChooseCards = [[NSMutableArray alloc] init];
-            self.score = 0;
-            
+           
             for(PlayingCard *otherCard in self.cards){
                 if (otherCard.isChosen && !otherCard.isMatched) {
                     
