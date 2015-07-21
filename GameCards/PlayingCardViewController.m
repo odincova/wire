@@ -7,12 +7,21 @@
 //
 
 #import "PlayingCardViewController.h"
+#import "PlayCardPack.h"
 
 @interface PlayingCardViewController ()
+
 
 @end
 
 @implementation PlayingCardViewController
+
+
+
+-(PackCards *)packCards{
+    
+    return [[PlayCardPack alloc] init];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

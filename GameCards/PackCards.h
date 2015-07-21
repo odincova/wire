@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Card.h"
 
 @interface PackCards : NSObject
+
+-(void)addCard:(Card *)card;
+-(void)addCard:(Card *)card atTop:(BOOL)atTop;
+-(Card *)drawRandomCard;
+
+
 
 @end
