@@ -79,6 +79,7 @@
 -(NSString*)titleForCard:(Card *)card{
     
     return card.isChosen ? card.contents:@"";
+   
 }
 
 -(UIImage *)backgroundForCard:(Card*)card{
