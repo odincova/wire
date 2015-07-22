@@ -14,10 +14,11 @@
 
 //@property (strong, nonatomic) PackCards *packCards;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UILabel *LastScoreLabel; //don`t use
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) PlayGame *game;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentOfNumberOfCards;
+@property (weak, nonatomic) IBOutlet UISlider *sliderScore;
+@property (weak, nonatomic) IBOutlet UILabel *labelSliderText;
 
 
 - (IBAction)newGame:(id)sender;
@@ -116,6 +117,23 @@
         [self updateUI];
     }
     
+}
+
+- (IBAction)sliderChange:(id)sender {
+    
+    
+   // NSString *sliderValue = [NSString stringWithFormat:@"%f", self.sliderScore.value];
+    
+    
+       // self.labelSliderText.text = sliderValue;
+    
+       // [self updateUI];
+
+//   [_sliderScore setMinimumValue:0.0];
+//   [_sliderScore setMaximumValue: self.game.score];
+//    
+      self.labelSliderText.text = [NSString stringWithFormat:@"%f", self.sliderScore.value];
+
 }
 
 

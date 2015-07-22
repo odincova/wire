@@ -149,9 +149,8 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QP2-qB-zba">
-                                <rect key="frame" x="26" y="381" width="268" height="32"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="89" y="367" width="142" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -384,10 +383,15 @@
                                     <action selector="touchCardButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Kd0-Pg-9sH"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJU-yE-371">
-                                <rect key="frame" x="26" y="415" width="268" height="61"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="xea-bH-gNi">
+                                <rect key="frame" x="19" y="473" width="282" height="31"/>
+                                <connections>
+                                    <action selector="sliderChange:" destination="vXZ-lx-hvc" eventType="valueChanged" id="Fgv-Hy-sl4"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNK-d4-5Ws">
+                                <rect key="frame" x="21" y="434" width="273" height="31"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -396,9 +400,10 @@
                         <color key="tintColor" red="0.227790885" green="0.7411244897" blue="0.94973169189999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="LastScoreLabel" destination="mJU-yE-371" id="VIH-zt-9S1"/>
+                        <outlet property="labelSliderText" destination="wNK-d4-5Ws" id="XXr-Rv-jOF"/>
                         <outlet property="scoreLabel" destination="QP2-qB-zba" id="LIT-Ud-Byz"/>
                         <outlet property="segmentOfNumberOfCards" destination="C9H-PY-aMj" id="Pta-ax-nLU"/>
+                        <outlet property="sliderScore" destination="xea-bH-gNi" id="HkL-Fi-s6m"/>
                         <outletCollection property="cardButtons" destination="Sy9-gr-pSz" id="EZj-pe-MyN"/>
                         <outletCollection property="cardButtons" destination="7we-1B-Fyl" id="JAZ-Bp-ZkQ"/>
                         <outletCollection property="cardButtons" destination="cpK-hY-TNk" id="MqN-59-EFN"/>
