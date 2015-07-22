@@ -20,6 +20,10 @@
 @property (weak, nonatomic) IBOutlet UISlider *sliderScore;
 @property (weak, nonatomic) IBOutlet UILabel *labelSliderText;
 
+@property(strong, nonatomic) NSMutableArray *changeScore;
+@property(nonatomic) NSInteger flipCount;
+@property (weak, nonatomic) IBOutlet UILabel *sliderMaxScore;
+
 
 - (IBAction)newGame:(id)sender;
 
@@ -55,10 +59,19 @@
     
 }
 
+- (NSMutableArray *)changeScore
+{
+    if (!_changeScore)_changeScore = [[NSMutableArray alloc] init];
+    
+    return _changeScore;
+}
+
+
 - (IBAction)touchCardButton:(UIButton *)sender{
     
     NSInteger chooseButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:chooseButtonIndex];
+    self.flipCount ++;
     [self updateUI];
 
 }
@@ -73,8 +86,11 @@
         [cardButton setBackgroundImage:[self backgroundForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
         self.scoreLabel.text = [NSString stringWithFormat:@"Score : %ld", (long)self.game.score];
-        
-    }
+          }
+    
+    self.sliderScore.maximumValue = self.flipCount;
+    [self.sliderScore setValue:(float)self.flipCount animated:YES];
+   self.sliderMaxScore.text = [NSString stringWithFormat:@"%d",(int)ceilf(self.sliderScore.maximumValue)];
 }
 
 -(NSString*)titleForCard:(Card *)card{
@@ -90,6 +106,8 @@
 
 - (IBAction)newGame:(id)sender {
     self.game = nil;
+    self.changeScore = nil;
+    self.flipCount = 0;
     [self updateUI];
     
 }
@@ -104,6 +122,10 @@
         
         self.game =[[PlayGame alloc] initWithCardCount:[self.cardButtons count] usingPackCards:[self packCards] matchedCards:2];
         
+        self.changeScore = nil;
+        
+        self.flipCount = 0;
+        
         [self updateUI];
     }
     
@@ -114,12 +136,23 @@
         
         self.game =[[PlayGame alloc] initWithCardCount:[self.cardButtons count] usingPackCards:[self packCards] matchedCards:3];
         
+        self.changeScore = nil;
+        
+        self.flipCount = 0;
+        
         [self updateUI];
     }
     
 }
 
-- (IBAction)sliderChange:(id)sender {
+- (IBAction)sliderChange:(UISlider *)sender {
+    
+    
+    int selectedIndex = (int) sender.value;
+    if (selectedIndex <0 || (selectedIndex > self.flipCount-1)) return;
+    self.scoreLabel.alpha = (selectedIndex < self.flipCount-1 ) ? 0.5 : 1.0;
+    NSString *text = [NSString stringWithFormat:@"%d:",(selectedIndex+1)];
+    self.scoreLabel.text = [text stringByAppendingString:[self.changeScore objectAtIndex:selectedIndex]];
     
     
    // NSString *sliderValue = [NSString stringWithFormat:@"%f", self.sliderScore.value];
@@ -132,9 +165,11 @@
 //   [_sliderScore setMinimumValue:0.0];
 //   [_sliderScore setMaximumValue: self.game.score];
 //    
-      self.labelSliderText.text = [NSString stringWithFormat:@"%f", self.sliderScore.value];
+    //  self.labelSliderText.text = [NSString stringWithFormat:@"%f", self.sliderScore.value];
 
 }
+
+
 
 
 
