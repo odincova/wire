@@ -12,7 +12,7 @@
 
 @property(nonatomic, readwrite) NSInteger score;
 @property(strong, nonatomic) NSMutableArray *cards;
-//@property(strong,nonatomic) NSMutableArray *faceChooseCards;
+@property(strong,nonatomic) NSMutableArray *faceChooseCards;
 @property (readwrite,nonatomic) NSInteger lastScoreLabel;
 
 
@@ -49,7 +49,7 @@
             }
         }
     }
-    self.matchedCountOfCards = matchedCountOfCards;
+   self.matchedCountOfCards = matchedCountOfCards;
     return self;
 }
 
@@ -76,39 +76,43 @@ static const int COST_TO_CHOOSE = 1;
         {
            
                         //add cards in array - faceChooseCards
-           NSMutableArray *faceChooseCards = [[NSMutableArray alloc] init];
-                       
+          self.faceChooseCards = [[NSMutableArray alloc] init];
+            self.lastScoreLabel = 0;
             for(PlayingCard *otherCard in self.cards){
                 if (otherCard.isChosen && !otherCard.isMatched) {
                     
-                    [faceChooseCards insertObject:otherCard atIndex:0];
-                    
-                    if ([faceChooseCards count] ==  _matchedCountOfCards - 1)
+                    [self.faceChooseCards insertObject:otherCard atIndex:0];
+                
+                    if ([self.faceChooseCards count] == _matchedCountOfCards)
                     {
-                        int matchScore = [card match:faceChooseCards];
+                        int matchScore = [card match:self.faceChooseCards];
                         if (matchScore) {
-                            self.score += (matchScore * SCORE_BONUS);
-                            for (Card *faceChooseCard in faceChooseCards) {
+                            self.lastScoreLabel = matchScore * SCORE_BONUS;
+                            for (Card *faceChooseCard in self.faceChooseCards) {
                                 faceChooseCard.isMatched = YES;
                                 card.isMatched = YES;
                                 
                             }
                             
                         }else{
-                            self.score -= SCORE_PINALTY;
-                            for (Card *faceChooseCard in faceChooseCards) {
+                            self.lastScoreLabel =  - SCORE_PINALTY;
+                            for (Card *faceChooseCard in self.faceChooseCards) {
                                 faceChooseCard.isChosen = NO;
                                 card.isChosen = NO;
                                 
                             }
                         }
-                       
+                        self.matchedCards =[self.faceChooseCards copy];
+                        break;
+
                     }
                     
                 }
                 
             }
-            self.score -=  COST_TO_CHOOSE;
+            self.score +=  self.lastScoreLabel - COST_TO_CHOOSE;
+            self.matchedCards = [self.faceChooseCards copy];
+
              card.isChosen = YES;
         }
     }

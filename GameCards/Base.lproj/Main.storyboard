@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--Playing Cards View Controller-->
+        <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="PlayingCardsViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eZl-8m-4vc"/>
                         <viewControllerLayoutGuide type="bottom" id="H0h-V2-jfb"/>
@@ -390,7 +390,7 @@
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNK-d4-5Ws">
-                                <rect key="frame" x="21" y="434" width="146" height="31"/>
+                                <rect key="frame" x="21" y="434" width="273" height="31"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -406,7 +406,7 @@
                         <color key="tintColor" red="0.227790885" green="0.7411244897" blue="0.94973169189999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="labelSliderText" destination="wNK-d4-5Ws" id="XXr-Rv-jOF"/>
+                        <outlet property="labelSliderText" destination="wNK-d4-5Ws" id="SWR-SD-Ytg"/>
                         <outlet property="scoreLabel" destination="QP2-qB-zba" id="LIT-Ud-Byz"/>
                         <outlet property="segmentOfNumberOfCards" destination="C9H-PY-aMj" id="Pta-ax-nLU"/>
                         <outlet property="sliderMaxScore" destination="9bR-gG-j8o" id="XQ7-hX-0Ej"/>
