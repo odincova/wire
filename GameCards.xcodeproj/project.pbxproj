@@ -19,7 +19,7 @@
 		18B52D861B4BD15F00AED7D0 /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B52D851B4BD15F00AED7D0 /* PlayingCard.m */; };
 		18B52D891B4BD24700AED7D0 /* PackCards.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B52D881B4BD24700AED7D0 /* PackCards.m */; };
 		18B52D8F1B4C007F00AED7D0 /* PlayCardPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B52D8E1B4C007F00AED7D0 /* PlayCardPack.m */; };
-		18FC8DF11B5E4F3700E8AA5A /* PlayingCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC8DF01B5E4F3700E8AA5A /* PlayingCardViewController.m */; };
+		18FC8DF41B5E666000E8AA5A /* PlayingCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FC8DF31B5E666000E8AA5A /* PlayingCardsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,8 +56,8 @@
 		18B52D881B4BD24700AED7D0 /* PackCards.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackCards.m; sourceTree = "<group>"; };
 		18B52D8D1B4C007F00AED7D0 /* PlayCardPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayCardPack.h; sourceTree = "<group>"; };
 		18B52D8E1B4C007F00AED7D0 /* PlayCardPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayCardPack.m; sourceTree = "<group>"; };
-		18FC8DEF1B5E4F3700E8AA5A /* PlayingCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardViewController.h; sourceTree = "<group>"; };
-		18FC8DF01B5E4F3700E8AA5A /* PlayingCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardViewController.m; sourceTree = "<group>"; };
+		18FC8DF21B5E666000E8AA5A /* PlayingCardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardsViewController.h; sourceTree = "<group>"; };
+		18FC8DF31B5E666000E8AA5A /* PlayingCardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +102,8 @@
 				18B52D801B4BCC5700AED7D0 /* Model */,
 				18B52D611B4BCBDA00AED7D0 /* ViewController.h */,
 				18B52D621B4BCBDA00AED7D0 /* ViewController.m */,
-				18FC8DEF1B5E4F3700E8AA5A /* PlayingCardViewController.h */,
-				18FC8DF01B5E4F3700E8AA5A /* PlayingCardViewController.m */,
+				18FC8DF21B5E666000E8AA5A /* PlayingCardsViewController.h */,
+				18FC8DF31B5E666000E8AA5A /* PlayingCardsViewController.m */,
 				18B52D641B4BCBDA00AED7D0 /* Main.storyboard */,
 				18B52D671B4BCBDA00AED7D0 /* Images.xcassets */,
 				18B52D691B4BCBDA00AED7D0 /* LaunchScreen.xib */,
@@ -258,8 +258,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				18B52D8F1B4C007F00AED7D0 /* PlayCardPack.m in Sources */,
+				18FC8DF41B5E666000E8AA5A /* PlayingCardsViewController.m in Sources */,
 				18B52D631B4BCBDA00AED7D0 /* ViewController.m in Sources */,
-				18FC8DF11B5E4F3700E8AA5A /* PlayingCardViewController.m in Sources */,
 				18B52D601B4BCBDA00AED7D0 /* AppDelegate.m in Sources */,
 				18B52D891B4BD24700AED7D0 /* PackCards.m in Sources */,
 				18B52D5D1B4BCBDA00AED7D0 /* main.m in Sources */,

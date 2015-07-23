@@ -7,17 +7,21 @@
 //
 
 #import "ViewController.h"
-#import "PlayCardPack.h"
+//#import "PlayCardPack.h"
 #import "PlayGame.h"
 
 @interface ViewController ()
 
 //@property (strong, nonatomic) PackCards *packCards;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UILabel *LastScoreLabel; //don`t use
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) PlayGame *game;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentOfNumberOfCards;
+
+@property (weak, nonatomic) IBOutlet UISlider *sliderScore;
+@property (weak, nonatomic) IBOutlet UILabel *labelSliderText;
+@property(strong, nonatomic) NSMutableArray *changeScore;
+@property(nonatomic) NSInteger flipCount;
 
 
 - (IBAction)newGame:(id)sender;
@@ -39,10 +43,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (PlayGame *)game{
+- (PlayGame *)game {
     
-    if(!_game)
-        _game =[[PlayGame alloc] initWithCardCount:[self.cardButtons count] usingPackCards:[self packCards] matchedCards:2];
+    if(!_game) {
+        
+        int matchedCardsCount = self.segmentOfNumberOfCards.selectedSegmentIndex == 0 ? 2 : 3;
+        
+        _game =[[PlayGame alloc] initWithCardCount:[self.cardButtons count]
+                                    usingPackCards:[self packCards]
+                                      matchedCards:matchedCardsCount];
+    }
     
     return _game;
 }
@@ -50,14 +60,58 @@
 
 -(PackCards *)packCards{
     
-    return [[PlayCardPack alloc] init]; // abstract
+    return nil; // abstract
     
 }
+
+- (NSMutableArray *)changeScore
+{
+    if (!_changeScore)_changeScore = [[NSMutableArray alloc] init];
+    
+    return _changeScore;
+}
+
+/*
+-(void)updateLabelResult{
+    
+    NSString *text=@" ";
+    if ([self.game.matchedCards  count] > 0)
+    {
+        text = [text stringByAppendingString:[self.game.matchedCards componentsJoinedByString:@" "]];
+        
+        if ([ self.game.matchedCards count ] == [self matchedCountOfCards]){
+            
+            if (self.game.lastScorelabel < 0) {
+                text = [text stringByAppendingString:[NSString stringWithFormat:@"✘ %ld penalty",(long)self.game.lastScorelabel]];
+            } else {
+                text = [text stringByAppendingString:[NSString stringWithFormat:@"✔ +%ld bonus",(long)self.game.lastScorelabel]];
+            }
+        } else text =[self textForSingleCard];
+        
+        [self.changeScore addObject:text];
+        
+    } else text = @"Play game!";
+    
+    self.labelSliderText.text = text;
+             
+    
+    [self.changeScore addObject:text];
+    
+}
+ */
+
+- (NSString *)textForSingleCard
+{
+    Card *card = [self.game.matchedCards lastObject];
+    return [NSString stringWithFormat:@" %@ flipped %@",card,(card.isChosen) ? @"up!" : @"back!"];
+}
+
 
 - (IBAction)touchCardButton:(UIButton *)sender{
     
     NSInteger chooseButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:chooseButtonIndex];
+    self.flipCount ++;
     [self updateUI];
 
 }
@@ -71,51 +125,69 @@
         [cardButton setTitle:[self titleForCard:card] forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self backgroundForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
-        self.scoreLabel.text = [NSString stringWithFormat:@"Score : %ld", (long)self.game.score];
-        
+         self.scoreLabel.text = [NSString stringWithFormat:@"Score : %ld", (long)self.game.score];
     }
+    
+   
+//    
+//    [self updateLabelResult];
+//    self.sliderScore.maximumValue = self.flipCount;
+//    [self.sliderScore setValue:(float)self.flipCount animated:YES];
 }
 
 -(NSString*)titleForCard:(Card *)card{
     
-    return card.isChosen ? card.contents:@"";
+    return card.isChosen ? card.contents:@" ";
+   
 }
 
 -(UIImage *)backgroundForCard:(Card*)card{
-    
+   
     return [UIImage imageNamed:card.isChosen ? @"cardfront" : @"cardback"];
 }
 
 - (IBAction)newGame:(id)sender {
     self.game = nil;
+    self.changeScore = nil;
+    self.flipCount = 0;
+    
     [self updateUI];
     
 }
 
-- (IBAction)segmentButton:(id)sender {
-    
-    if (_segmentOfNumberOfCards.selectedSegmentIndex == 0) {
-        
-        
-        self.game = nil;
-        
-        
-        self.game =[[PlayGame alloc] initWithCardCount:[self.cardButtons count] usingPackCards:[self packCards] matchedCards:2];
-        
-        [self updateUI];
-    }
-    
-    if (_segmentOfNumberOfCards.selectedSegmentIndex == 1) {
-        
-        
-        self.game = nil;
-        
-        self.game =[[PlayGame alloc] initWithCardCount:[self.cardButtons count] usingPackCards:[self packCards] matchedCards:3];
-        
-        [self updateUI];
-    }
-    
+             
+- (IBAction)segmentButton:(id)sender
+{
+    [self newGame:sender];
 }
+
+- (IBAction)sliderChange:(UISlider *)sender {
+    
+    
+    int selectedIndex = (int) sender.value;
+    if (selectedIndex < 0 || (selectedIndex > self.flipCount-1)) return;
+    self.labelSliderText.alpha = (selectedIndex < self.flipCount-1 ) ? 0.5 : 1.0;
+    NSString *text = [NSString stringWithFormat:@"%d:",(selectedIndex+1)];
+    self.labelSliderText.text = [text stringByAppendingString:[self.changeScore objectAtIndex:selectedIndex]];
+    
+    
+     //self.labelSliderText.text = 1;
+    
+   // NSString *sliderValue = [NSString stringWithFormat:@"%f", self.sliderScore.value];
+    
+    
+       // self.labelSliderText.text = sliderValue;
+    
+       // [self updateUI];
+
+//   [_sliderScore setMinimumValue:0.0];
+//   [_sliderScore setMaximumValue: self.game.score];
+//    
+    //  self.labelSliderText.text = [NSString stringWithFormat:@"%f", self.sliderScore.value];
+
+}
+
+
 
 
 

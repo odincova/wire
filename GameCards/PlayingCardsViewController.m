@@ -1,26 +1,24 @@
 //
-//  PlayingCardViewController.m
+//  PlayingCardsViewController.m
 //  GameCards
 //
-//  Created by Juliya on 20.07.15.
+//  Created by Juliya on 21.07.15.
 //  Copyright (c) 2015 Juliya Odincova. All rights reserved.
 //
 
-#import "PlayingCardViewController.h"
+#import "PlayingCardsViewController.h"
 #import "PlayCardPack.h"
 
-@interface PlayingCardViewController ()
-
+@interface PlayingCardsViewController ()
 
 @end
 
-@implementation PlayingCardViewController
-
-
+@implementation PlayingCardsViewController
 
 -(PackCards *)packCards{
     
     return [[PlayCardPack alloc] init];
+    
 }
 
 - (void)viewDidLoad {
