@@ -20,11 +20,11 @@
 
 @implementation PlayGame
 
--(void)setMatchedCount:(NSUInteger)matchedCount{
-   
-    _matchedCountOfCards = _matchedCountOfCards >=2 ? _matchedCountOfCards: 2;
-    
-}
+//-(void)setMatchedCount:(NSUInteger)matchedCount{
+//   
+//    _matchedCountOfCards = matchedCount > 3 ? 3 : matchedCount;
+//    
+//}
 
 -(NSMutableArray *)cards{
     
@@ -49,7 +49,7 @@
             }
         }
     }
-   self.matchedCountOfCards = matchedCountOfCards;
+    _matchedCountOfCards = matchedCountOfCards;
     return self;
 }
 
@@ -83,7 +83,7 @@ static const int COST_TO_CHOOSE = 1;
                     
                     [self.faceChooseCards insertObject:otherCard atIndex:0];
                 
-                    if ([self.faceChooseCards count] == _matchedCountOfCards)
+                    if ([self.faceChooseCards count] == _matchedCountOfCards - 1)
                     {
                         int matchScore = [card match:self.faceChooseCards];
                         if (matchScore) {

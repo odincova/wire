@@ -12,7 +12,7 @@
 
 @interface PlayGame : PackCards
 
-@property(nonatomic) NSUInteger matchedCountOfCards;
+@property(nonatomic, readonly) NSUInteger matchedCountOfCards;
 @property(nonatomic, readonly) NSInteger score;
 
 @property (strong,nonatomic) NSArray *matchedCards;

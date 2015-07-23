@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Playing Cards View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="PlayingCardsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eZl-8m-4vc"/>
                         <viewControllerLayoutGuide type="bottom" id="H0h-V2-jfb"/>
@@ -395,12 +395,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bR-gG-j8o">
-                                <rect key="frame" x="235" y="434" width="64" height="31"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.1015988397" green="0.58733822599999996" blue="0.097318426929999993" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.227790885" green="0.7411244897" blue="0.94973169189999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -409,7 +403,6 @@
                         <outlet property="labelSliderText" destination="wNK-d4-5Ws" id="SWR-SD-Ytg"/>
                         <outlet property="scoreLabel" destination="QP2-qB-zba" id="LIT-Ud-Byz"/>
                         <outlet property="segmentOfNumberOfCards" destination="C9H-PY-aMj" id="Pta-ax-nLU"/>
-                        <outlet property="sliderMaxScore" destination="9bR-gG-j8o" id="XQ7-hX-0Ej"/>
                         <outlet property="sliderScore" destination="xea-bH-gNi" id="HkL-Fi-s6m"/>
                         <outletCollection property="cardButtons" destination="Sy9-gr-pSz" id="EZj-pe-MyN"/>
                         <outletCollection property="cardButtons" destination="7we-1B-Fyl" id="JAZ-Bp-ZkQ"/>
