@@ -14,19 +14,13 @@
 @property(strong, nonatomic) NSMutableArray *cards;
 @property(strong,nonatomic) NSMutableArray *faceChooseCards;
 @property (readwrite,nonatomic) NSInteger lastScoreLabel;
-
+@property (strong,nonatomic,readwrite) NSMutableArray *logs;
 
 @end
 
 @implementation PlayGame
 
-//-(void)setMatchedCount:(NSUInteger)matchedCount{
-//   
-//    _matchedCountOfCards = matchedCount > 3 ? 3 : matchedCount;
-//    
-//}
-
--(NSMutableArray *)cards{
+-(NSMutableArray *)cards {
     
     if (!_cards)_cards = [[NSMutableArray alloc] init];
     return _cards;
@@ -50,6 +44,8 @@
         }
     }
     _matchedCountOfCards = matchedCountOfCards;
+    self.logs = [NSMutableArray new];
+    
     return self;
 }
 
@@ -83,8 +79,12 @@ static const int COST_TO_CHOOSE = 1;
                     
                     [self.faceChooseCards insertObject:otherCard atIndex:0];
                 
+                    NSString *log;
+                    
                     if ([self.faceChooseCards count] == _matchedCountOfCards - 1)
                     {
+                        // Будет сравнение
+                        
                         int matchScore = [card match:self.faceChooseCards];
                         if (matchScore) {
                             self.lastScoreLabel = matchScore * SCORE_BONUS;
@@ -93,27 +93,33 @@ static const int COST_TO_CHOOSE = 1;
                                 card.isMatched = YES;
                                 
                             }
-                            
-                        }else{
+                            // Log about matched cards
+                            log = [NSString stringWithFormat:@"Cards %@ %@ matched with score: %ld", card,
+                                   [self.faceChooseCards componentsJoinedByString:@" "], (long)_lastScoreLabel];
+                        } else {
                             self.lastScoreLabel =  - SCORE_PINALTY;
                             for (Card *faceChooseCard in self.faceChooseCards) {
                                 faceChooseCard.isChosen = NO;
                                 card.isChosen = NO;
                                 
                             }
+                            // Log about mismatched cards
+                            log = [NSString stringWithFormat:@"Cards %@, %@ mismatched with penalty: %ld", card,
+                                   [self.faceChooseCards componentsJoinedByString:@" "], (long)_lastScoreLabel];
+                            
                         }
-                        self.matchedCards =[self.faceChooseCards copy];
+                        [self.logs addObject:log];
+                        
                         break;
-
                     }
                     
                 }
                 
             }
             self.score +=  self.lastScoreLabel - COST_TO_CHOOSE;
-            self.matchedCards = [self.faceChooseCards copy];
+            //
 
-             card.isChosen = YES;
+            card.isChosen = YES;
         }
     }
 }

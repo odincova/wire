@@ -71,40 +71,51 @@
     return _changeScore;
 }
 
-/*
--(void)updateLabelResult{
-    
-    NSString *text=@" ";
-    if ([self.game.matchedCards  count] > 0)
-    {
-        text = [text stringByAppendingString:[self.game.matchedCards componentsJoinedByString:@" "]];
-        
-        if ([ self.game.matchedCards count ] == [self matchedCountOfCards]){
-            
-            if (self.game.lastScorelabel < 0) {
-                text = [text stringByAppendingString:[NSString stringWithFormat:@"✘ %ld penalty",(long)self.game.lastScorelabel]];
-            } else {
-                text = [text stringByAppendingString:[NSString stringWithFormat:@"✔ +%ld bonus",(long)self.game.lastScorelabel]];
-            }
-        } else text =[self textForSingleCard];
-        
-        [self.changeScore addObject:text];
-        
-    } else text = @"Play game!";
-    
-    self.labelSliderText.text = text;
-             
-    
-    [self.changeScore addObject:text];
-    
-}
- */
 
-- (NSString *)textForSingleCard
-{
-    Card *card = [self.game.matchedCards lastObject];
-    return [NSString stringWithFormat:@" %@ flipped %@",card,(card.isChosen) ? @"up!" : @"back!"];
+-(void)updateHistory {
+    
+    self.sliderScore.minimumValue = 0;
+    self.sliderScore.maximumValue = self.game.logs.count;
+    self.sliderScore.value = self.sliderScore.maximumValue;
+    [self sliderChange:self.sliderScore];
+    
+    if (self.game.logs.count > 0) {
+        self.sliderScore.hidden = NO;
+        self.labelSliderText.hidden = NO;
+    }
+    
+    
+//    NSString *text=@" ";
+//    if ([self.game.matchedCards  count] > 0)
+//    {
+//        text = [text stringByAppendingString:[self.game.matchedCards componentsJoinedByString:@" "]];
+//        
+//        if ([ self.game.matchedCards count ] == [self matchedCountOfCards]){
+//            
+//            if (self.game.lastScorelabel < 0) {
+//                text = [text stringByAppendingString:[NSString stringWithFormat:@"✘ %ld penalty",(long)self.game.lastScorelabel]];
+//            } else {
+//                text = [text stringByAppendingString:[NSString stringWithFormat:@"✔ +%ld bonus",(long)self.game.lastScorelabel]];
+//            }
+//        } else text =[self textForSingleCard];
+//        
+//        [self.changeScore addObject:text];
+//        
+//    } else text = @"Play game!";
+//    
+//    self.labelSliderText.text = text;
+//             
+//    
+//    [self.changeScore addObject:text];
+    
 }
+ 
+
+//- (NSString *)textForSingleCard
+//{
+//    Card *card = [self.game.matchedCards lastObject];
+//    return [NSString stringWithFormat:@" %@ flipped %@",card,(card.isChosen) ? @"up!" : @"back!"];
+//}
 
 
 - (IBAction)touchCardButton:(UIButton *)sender{
@@ -128,7 +139,7 @@
          self.scoreLabel.text = [NSString stringWithFormat:@"Score : %ld", (long)self.game.score];
     }
     
-   
+    [self updateHistory];
 //    
 //    [self updateLabelResult];
 //    self.sliderScore.maximumValue = self.flipCount;
@@ -150,6 +161,8 @@
     self.game = nil;
     self.changeScore = nil;
     self.flipCount = 0;
+    self.sliderScore.hidden = YES;
+    self.labelSliderText.hidden = YES;
     
     [self updateUI];
     
@@ -163,12 +176,18 @@
 
 - (IBAction)sliderChange:(UISlider *)sender {
     
+    int currentIndex = (int)self.sliderScore.value - 1;
+    if (currentIndex < self.game.logs.count) {
+        NSString *log = self.game.logs[currentIndex];
+        self.labelSliderText.text = log;
+    }
     
-    int selectedIndex = (int) sender.value;
-    if (selectedIndex < 0 || (selectedIndex > self.flipCount-1)) return;
-    self.labelSliderText.alpha = (selectedIndex < self.flipCount-1 ) ? 0.5 : 1.0;
-    NSString *text = [NSString stringWithFormat:@"%d:",(selectedIndex+1)];
-    self.labelSliderText.text = [text stringByAppendingString:[self.changeScore objectAtIndex:selectedIndex]];
+    
+//    int selectedIndex = (int) sender.value;
+//    if (selectedIndex < 0 || (selectedIndex > self.flipCount-1)) return;
+//    self.labelSliderText.alpha = (selectedIndex < self.flipCount-1 ) ? 0.5 : 1.0;
+//    NSString *text = [NSString stringWithFormat:@"%d:",(selectedIndex+1)];
+//    self.labelSliderText.text = [text stringByAppendingString:[self.changeScore objectAtIndex:selectedIndex]];
     
     
      //self.labelSliderText.text = 1;

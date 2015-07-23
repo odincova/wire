@@ -15,7 +15,8 @@
 @property(nonatomic, readonly) NSUInteger matchedCountOfCards;
 @property(nonatomic, readonly) NSInteger score;
 
-@property (strong,nonatomic) NSArray *matchedCards;
+@property (strong,nonatomic,readonly) NSMutableArray *logs;
+
 @property (readonly,nonatomic) NSInteger lastScorelabel;
 
 -(instancetype)initWithCardCount:(NSUInteger)count
