@@ -12,7 +12,7 @@
 
 @interface ViewController ()
 
-//@property (strong, nonatomic) PackCards *packCards;
+
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) PlayGame *game;
